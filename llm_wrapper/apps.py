@@ -9,5 +9,4 @@ class OpenAIConfig(AppConfig):
     def ready(self) -> None:
         from llm_wrapper.repositories import ValidLLMConfigs
 
-        if not settings.DISABLE_PROMPT_VALIDATIONS:
-            ValidLLMConfigs.check_llm_configs_in_db()
+        ValidLLMConfigs.check_llm_configs_in_db()

@@ -136,4 +136,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LLM_CONFIGS_PATH = str(BASE_DIR) + "/llm_configs/"
-DISABLE_PROMPT_VALIDATIONS = False
