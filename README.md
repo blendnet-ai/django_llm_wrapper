@@ -1,15 +1,24 @@
+
+
+## Example Workflow
+
+1. **Configuration**: Add YAML files for all required LLM configurations and populate the `LLMConfigName` table.
+2. **Define Prompt Templates**: Create entries in the `PromptTemplate` table.
+3. **Initialize Wrapper**: Instantiate the `LLMCommunicationWrapper` or `ABTestingLLMCommunicationWrapper`.
+4. **Send Messages**: Use `send_user_message_and_get_response` to interact with the LLM.
+
+---
 ## Models Overview
 
 ### **Tool**
-Defines tools that can be integrated into prompt templates.
 
 - **Fields**:
-  - `updated_at`, `created_at`: Timestamps for tracking creation and updates.
-  - `tool_code`: Code defining the tool's behavior.
-  - `default_values_for_non_llm_params`: Default parameters for non-LLM tools.
-  - `tool_json_spec`: Tool specifications in JSON format.
+  - `updated_at`, `created_at`: Timestamps.
+  - `tool_code`
+  - `default_values_for_non_llm_params`
+  - `tool_json_spec`
   - `name`: Name of the tool.
-  - `context_params`: Context-specific parameters.
+  - `context_params`
 
 ---
 
@@ -31,7 +40,7 @@ Manages prompt templates used for LLM communication.
   - `initial_messages_templates`: Initial messages in JSON format.
   - `system_prompt_template`: System-level prompt.
   - `user_prompt_template`: User-level prompt.
-  - `logged_context_vars`: Context variables to be logged with each user message.
+  - `logged_context_vars`: ??
   - `tools`: ??
 
 ---
@@ -106,16 +115,22 @@ To define a new prompt template:
     ```python
     from your_app_name.repositories import LLMCommunicationWrapper
     ```
+    or
+   ```python
+   from your_app_name.repositories import ABTestingLLMCommunicationWrapper
+   ```
 
-2. Create an instance of the wrapper:
+3. Create an instance of the wrapper:
+### Without PostHog template selection:
    - **Example 1**: Initialize a new chat session:
 
      ```python
      llm_wrapper = LLMCommunicationWrapper(
-         prompt_name="dsa_approach_prompt",
+         prompt_name="prompt_template_name",
          chat_history_id=None,
          initialize=True,
          initializing_context_vars={"question": "Print something in Python"},
+         response_format_class=Response,
      )
      ```
 
@@ -123,12 +138,34 @@ To define a new prompt template:
 
      ```python
      llm_wrapper = LLMCommunicationWrapper(
-         prompt_name="dsa_approach_prompt",
+         prompt_name="prompt_template_name",
          chat_history_id=6,
          initialize=False,
          initializing_context_vars={"question": "Find sum of digits of the given number"},
+         response_format_class=Response,
      )
      ```
+- `prompt_name`: Name of prompt template.
+- `chat_history_id`: `id` from `ChatHistory` table.
+- `initialize`: boolean to create a new `ChatHistory` row.
+- `initializing_context_vars`: Intial context vars.
+- `response_format_class` (if supported by the model)
+
+### With PostHog template selection:
+  ```python
+    llm_wrapper = ABTestingLLMCommunicationWrapper(
+      user_id=1,
+      experiment_name="your_experiment_name",
+      default_prompt_template_name="prompt_template_name",
+      chat_history_id=6,
+      initialize=False,
+      initializing_context_vars={"question": "Find sum of digits"},
+      response_format_class=Response,
+    )
+  ```
+- `user_id`
+- `experiment_name`: Experiment name from PostHog.
+- `default_prompt_template_name`: Used if prompt template name could not be determined through PostHog. 
 
 ---
 
@@ -154,12 +191,4 @@ Use the `send_user_message_and_get_response` method to send a message and get a 
 
 ---
 
-## Example Workflow
-
-1. **Configure LLMs**: Add YAML files for all required LLM configurations and populate the `LLMConfigName` table.
-2. **Define Prompt Templates**: Create entries in the `PromptTemplate` table.
-3. **Initialize Wrapper**: Instantiate the `LLMCommunicationWrapper` with the desired prompt template and context.
-4. **Send Messages**: Use `send_user_message_and_get_response` to interact with the LLM.
-
----
 
