@@ -1,0 +1,9 @@
+Django==4.2.16
+posthog==3.7.4
+python-dotenv==1.0.0
+psycopg[binary]==3.1.12
+openai>=1.40.0
+PyYAML==6.0.1
+litellm==1.44.15
+
+#docker run --name llmwrapper-postgres --env POSTGRES_PASSWORD=admin --volume llmwrapper-volume:/var/lib/postgresql/data --publish 5431:5432 --detach postgres
