@@ -18,7 +18,7 @@ Enable function calling (as defined [here](https://platform.openai.com/docs/guid
   - `updated_at`, `created_at`: Timestamps.
   - `tool_code`
   - `default_values_for_non_llm_params`
-  - `tool_json_spec`
+  - `tool_json_spec`: Filled automatically when added from admin form.
   - `name`: Name of the tool.
   - `context_params`
 
