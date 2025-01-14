@@ -11,6 +11,7 @@
 ## Models Overview
 
 ### **Tool**
+Enable function calling (as defined [here](https://platform.openai.com/docs/guides/function-calling))
 
 - **Fields**:
   - `updated_at`, `created_at`: Timestamps.
@@ -40,8 +41,8 @@ Manages prompt templates used for LLM communication.
   - `initial_messages_templates`: Initial messages in JSON format.
   - `system_prompt_template`: System-level prompt.
   - `user_prompt_template`: User-level prompt.
-  - `logged_context_vars`: ??
-  - `tools`: ??
+  - `logged_context_vars`: Context vars to be included in chat history.
+  - `tools`: Many-to-many relationship with `Tool`.
 
 ---
 
@@ -106,6 +107,15 @@ To define a new prompt template:
    - `tools`: ??
 
 ---
+
+## Defining a function tool
+
+1. Go to the admin form for tool (`/admin/llm_wrapper/tool/add/`)
+2. Fill the values
+3. Associate tool with `PromptTemplate`
+
+---
+
 
 ## Using the LLM Wrapper
 
