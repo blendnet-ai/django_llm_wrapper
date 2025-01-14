@@ -1,12 +1,25 @@
+# Django LLM Wrapper
+
+A reusable Django application that provides a flexible wrapper for Large Language Models (LLMs) with built-in experimentation capabilities using PostHog.
+
+## Features
+
+- Support for multiple LLM providers (Azure OpenAI, Gemini, Anthropic, Groq)
+- Built-in A/B testing capabilities using PostHog
+- Function calling support through Tools
+- Chat history management
+- Configurable prompt templates
+- Response format validation using Pydantic models
 
 
 ## Example Workflow
 
-1. **Configuration**: Add YAML files for all required LLM configurations and populate the `LLMConfigName` table.
-2. **Define Prompt Templates**: Create entries in the `PromptTemplate` table.
-3. **Defining a function tool** (optional): Create entries in the `Tool` table.
-4. **Initialize Wrapper**: Instantiate the `LLMCommunicationWrapper` or `ABTestingLLMCommunicationWrapper`.
-5. **Send Messages**: Use `send_user_message_and_get_response` to interact with the LLM.
+1. **Installation**: Copy paste the llm_wrapper app in your code base. Add 'llm_wrapper' to your INSTALLED_APPS. Run migrations.
+2. **Configuration**: Add YAML files for all required LLM configurations and populate the `LLMConfigName` table.
+3. **Define Prompt Templates**: Create entries in the `PromptTemplate` via django admin.
+4. **Defining a function tool** (optional): Create entries in the `Tool` via django admin.
+5. **Initialize Wrapper**: Instantiate the `LLMCommunicationWrapper` or `ABTestingLLMCommunicationWrapper`.
+6. **Send Messages**: Use `send_user_message_and_get_response` to interact with the LLM.
 
 ---
 ## Models Overview
@@ -177,6 +190,10 @@ To define a new prompt template:
 - `experiment_name`: Experiment name from PostHog.
 - `default_prompt_template_name`: Used if prompt template name could not be determined through PostHog. 
 
+#### Required settings in settings.py required for Posthog Integration
+POSTHOG_API_KEY=your_posthog_api_key
+POSTHOG_HOST=https://us.i.posthog.com
+POSTHOG_PERSONAL_API_KEY=your_posthog_personal_api_key
 ---
 
 ### **Sending Messages**
