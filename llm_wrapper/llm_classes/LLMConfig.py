@@ -42,8 +42,6 @@ class LLMConfig:
             return AnthropicConfig
         elif name == "GroqConfig":
             return GroqConfig
-        elif name == "OpenAIAssistantConfig":
-            return OpenAIAssistantConfig
         else:
             raise ImproperlyConfigured(f"Unsupported LLMConfig type: {name}")
 

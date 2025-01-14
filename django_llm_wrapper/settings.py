@@ -45,6 +45,12 @@ INSTALLED_APPS = [
     'llm_wrapper',
 ]
 
+
+INSTALLED_APPS.extend([
+    "codemirror2",
+])
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -136,3 +142,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LLM_CONFIGS_PATH = str(BASE_DIR) + "/llm_configs/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
