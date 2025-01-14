@@ -104,8 +104,7 @@ To define a new prompt template:
 
    - `system_prompt_template`: Template text for the system-level prompt.
    - `user_prompt_template`: Template text for user-specific prompts.
-   - `logged_context_vars`: ??
-   - `tools`: ??
+   - `logged_context_vars`: Defined context vars which needs to be logged in chat history.
 
 ---
 
