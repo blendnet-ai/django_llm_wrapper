@@ -4,8 +4,9 @@
 
 1. **Configuration**: Add YAML files for all required LLM configurations and populate the `LLMConfigName` table.
 2. **Define Prompt Templates**: Create entries in the `PromptTemplate` table.
-3. **Initialize Wrapper**: Instantiate the `LLMCommunicationWrapper` or `ABTestingLLMCommunicationWrapper`.
-4. **Send Messages**: Use `send_user_message_and_get_response` to interact with the LLM.
+3. **Defining a function tool** (optional): Create entries in the `Tool` table.
+4. **Initialize Wrapper**: Instantiate the `LLMCommunicationWrapper` or `ABTestingLLMCommunicationWrapper`.
+5. **Send Messages**: Use `send_user_message_and_get_response` to interact with the LLM.
 
 ---
 ## Models Overview
